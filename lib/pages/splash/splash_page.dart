@@ -42,9 +42,10 @@ class _SplashPageState extends State<SplashPage> {
                 const Spacer(),
                 Text("Ecommerce", style: TextStyle(color: Constants.primaryTextColor, fontSize: 30, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 8),
-                Text("Your Security, Simplified.", style: TextStyle(color: Constants.secondaryTextColor, fontSize: 18, fontWeight: FontWeight.w400)),
-                const SizedBox(height: 20),
-                const Loader()
+                Text("Your Shopping, Simplified.", style: TextStyle(color: Constants.secondaryTextColor, fontSize: 18, fontWeight: FontWeight.w400)),
+                const Spacer(),
+                const Loader(),
+                const SizedBox(height: 50),
               ],
             ),
           ),

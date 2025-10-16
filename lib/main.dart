@@ -34,9 +34,10 @@ class Main extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor:Constants.bottomBarBgColor,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor:Constants.primaryTextColor,
         systemNavigationBarIconBrightness: Brightness.light,
-        systemNavigationBarDividerColor: Constants.bottomBarBgColor,
+        systemNavigationBarDividerColor: Constants.primaryTextColor,
     ));
   }
 
