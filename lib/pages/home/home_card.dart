@@ -36,70 +36,66 @@ class _HomeCardState extends State<HomeCard> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 150,
-            child: Stack(
-              children: [
-                Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      widget.product.thumbnail.isEmpty
-                          ? imageUrl
-                          : widget.product.thumbnail,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                      errorBuilder: (_, __, ___) => Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                      ),
+          Stack(
+            children: [
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    widget.product.thumbnail.isEmpty
+                        ? imageUrl
+                        : widget.product.thumbnail,
+                    fit: BoxFit.fill,
+                    errorBuilder: (_, __, ___) => Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                if (discountPercentage > 0)
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        "SAVE ${discountPercentage.toInt()}% OFF",
-                        style: TextStyle(
-                          fontSize: 8,
-                          fontWeight: FontWeight.bold,
-                          color: Constants.primaryTextColor,
-                        ),
-                      ),
-                    ),
-                  ),
+              ),
+              if (discountPercentage > 0)
                 Positioned(
                   top: 0,
-                  right: 0,
-                  child: GestureDetector(
-                    child: Icon(
-                      widget.product.isFavourite
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined,
-                      color: widget.product.isFavourite
-                          ? Colors.red
-                          : Colors.grey.shade700,
-                      size: 22,
+                  left: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 6, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    onTap: () {
-                      setState(() {
-                        widget.product.isFavourite =
-                        !widget.product.isFavourite;
-                      });
-                    },
+                    child: Text(
+                      "SAVE ${discountPercentage.toInt()}% OFF",
+                      style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                        color: Constants.primaryTextColor,
+                      ),
+                    ),
                   ),
                 ),
-              ],
-            ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: GestureDetector(
+                  child: Icon(
+                    widget.product.isFavourite
+                        ? Icons.favorite
+                        : Icons.favorite_border_outlined,
+                    color: widget.product.isFavourite
+                        ? Colors.red
+                        : Colors.grey.shade700,
+                    size: 22,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      widget.product.isFavourite =
+                      !widget.product.isFavourite;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Text(
