@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import '../models/api/generic_response.dart';
-import '../models/api/login_response.dart';
+import 'package:ecommerce/models/responseHandler/product_response.dart';
+import '../models/responseHandler/generic_response.dart';
+import '../models/responseHandler/login_response.dart';
 import 'interceptors/custom_interceptor.dart';
 import 'json_type_converter.dart';
 import 'json_type_map.dart';
 
 part 'api_service.chopper.dart';
 
-@ChopperApi(baseUrl: "/")
+@ChopperApi(baseUrl: "/api")
 abstract class ApiService extends ChopperService {
   static ApiService create(String baseUrl) {
     final chopperClient = ChopperClient(
@@ -24,17 +25,17 @@ abstract class ApiService extends ChopperService {
     return _$ApiService(chopperClient);
   }
 
-  @GET(path: "admin/product")
-  Future<Response<GenericResponse>> getProduct(@Query() Map<String, dynamic> data);
-
-  @POST(path: "admin/auth/login")
+  @POST(path: "/admin/auth/login")
   Future<Response<LoginResponse>> login(@Body() Map<String, dynamic> data);
+
+  @GET(path: "/v1/store/product-search")
+  Future<Response<ProductResponse>> getProduct(@Query() String page, @Query() q, @);
 
 }
 
 
 class ApiProvider {
-  static ApiService instance = ApiService.create("https://bb3-api.ashwinsrivastava.com");
+  static ApiService instance = ApiService.create("https://www.stryce.com");
 
 }
 

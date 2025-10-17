@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
-import '../models/api/generic_response.dart';
+import '../models/responseHandler/generic_response.dart';
 import '../utills/helpers.dart';
 
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);

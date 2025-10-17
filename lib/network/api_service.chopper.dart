@@ -19,8 +19,16 @@ final class _$ApiService extends ApiService {
   final Type definitionType = ApiService;
 
   @override
-  Future<Response<GenericResponse>> getProduct(Map<String, dynamic> data) {
-    final Uri $url = Uri.parse('/admin/product');
+  Future<Response<LoginResponse>> login(Map<String, dynamic> data) {
+    final Uri $url = Uri.parse('/api/admin/auth/login');
+    final $body = data;
+    final Request $request = Request('POST', $url, client.baseUrl, body: $body);
+    return client.send<LoginResponse, LoginResponse>($request);
+  }
+
+  @override
+  Future<Response<ProductResponse>> getProduct(Map<String, dynamic> data) {
+    final Uri $url = Uri.parse('/api/v1/store/product-search');
     final Map<String, dynamic> $params = <String, dynamic>{'data': data};
     final Request $request = Request(
       'GET',
@@ -28,14 +36,6 @@ final class _$ApiService extends ApiService {
       client.baseUrl,
       parameters: $params,
     );
-    return client.send<GenericResponse, GenericResponse>($request);
-  }
-
-  @override
-  Future<Response<LoginResponse>> login(Map<String, dynamic> data) {
-    final Uri $url = Uri.parse('/admin/auth/login');
-    final $body = data;
-    final Request $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<LoginResponse, LoginResponse>($request);
+    return client.send<ProductResponse, ProductResponse>($request);
   }
 }

@@ -48,7 +48,7 @@ class Main extends StatelessWidget {
       title: 'Ecommerce',
       theme: ThemeData(
           useMaterial3: true,
-          fontFamily: 'SpaceGrotesk',
+          fontFamily: 'Outfit',
           scaffoldBackgroundColor: Colors.black,
           primaryColor: Constants.primary,
           primaryColorLight: Constants.primary,
