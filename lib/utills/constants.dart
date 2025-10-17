@@ -5,8 +5,8 @@ class Constants{
   static Color bgColor =  Colors.grey.shade50;
   static Color bottomBarBgColor =  Colors.white;
   static Color cardBgColor =  Colors.white;
-  static Color appBarBgColor =  Colors.grey.shade50;
-  static Color textFieldBorderColor =  Colors.grey.shade600;
+  static Color appBarBgColor =  Colors.white;
+  static Color textFieldBorderColor =  Colors.grey.shade300;
   static Color primaryTextColor =  Colors.black;
   static Color secondaryTextColor =  Colors.grey.shade400;
 

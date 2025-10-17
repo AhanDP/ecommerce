@@ -9,7 +9,7 @@ import 'json_type_map.dart';
 
 part 'api_service.chopper.dart';
 
-@ChopperApi(baseUrl: "/api")
+@ChopperApi(baseUrl: "/api/v1")
 abstract class ApiService extends ChopperService {
   static ApiService create(String baseUrl) {
     final chopperClient = ChopperClient(
@@ -28,8 +28,8 @@ abstract class ApiService extends ChopperService {
   @POST(path: "/admin/auth/login")
   Future<Response<LoginResponse>> login(@Body() Map<String, dynamic> data);
 
-  @GET(path: "/v1/store/product-search")
-  Future<Response<ProductResponse>> getProduct(@Query() String page, @Query() q, @);
+  @GET(path: "/store/product-search")
+  Future<Response<ProductResponse>> getProduct(@Query() int page, @Query() String q, @Query() int limit);
 
 }
 

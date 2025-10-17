@@ -20,16 +20,20 @@ final class _$ApiService extends ApiService {
 
   @override
   Future<Response<LoginResponse>> login(Map<String, dynamic> data) {
-    final Uri $url = Uri.parse('/api/admin/auth/login');
+    final Uri $url = Uri.parse('/api/v1/admin/auth/login');
     final $body = data;
     final Request $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<LoginResponse, LoginResponse>($request);
   }
 
   @override
-  Future<Response<ProductResponse>> getProduct(Map<String, dynamic> data) {
+  Future<Response<ProductResponse>> getProduct(int page, String q, int limit) {
     final Uri $url = Uri.parse('/api/v1/store/product-search');
-    final Map<String, dynamic> $params = <String, dynamic>{'data': data};
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'page': page,
+      'q': q,
+      'limit': limit,
+    };
     final Request $request = Request(
       'GET',
       $url,

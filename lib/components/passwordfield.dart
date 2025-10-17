@@ -55,19 +55,26 @@ class _PasswordFieldState extends State<PasswordField> {
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color: Colors.redAccent, width: 2),
           ),
-          suffixIcon: IconButton(
-            onPressed: () {
+          suffixIconConstraints: const BoxConstraints(
+            minHeight: 24,
+            minWidth: 24,
+          ),
+          suffixIcon: GestureDetector(
+            onTap: () {
               setState(() {
                 isHide = !isHide;
               });
             },
-            icon: Icon(
-              isHide ? Icons.visibility : Icons.visibility_off,
-              color: Colors.grey.shade500,
-              size: 20,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Icon(
+                isHide ? Icons.visibility : Icons.visibility_off,
+                color: Colors.grey.shade500,
+                size: 20,
+              ),
             ),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8)
+          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8)
       ),
     );
   }

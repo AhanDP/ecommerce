@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:ecommerce/components/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../localStorage/local_storage.dart';
@@ -37,7 +36,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       await ApiCallHandler.call(
         apiCall: () async => await ApiProvider.instance.login(request),
-        onLoading: () => CustomDialog.instance.showLoadingDialog(),
+        onLoading: () => Helpers.showLoadingDialog(),
         onSuccess: (response) async {
           Navigation.instance.goBack();
           Helpers.showToast("Login Successful");

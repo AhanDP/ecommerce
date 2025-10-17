@@ -17,7 +17,7 @@ class Button extends StatelessWidget {
       height: height ?? 50,
       minWidth: width ?? double.infinity,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(12),
       ),
       color: bgColor ?? Constants.primary,
       onPressed: onPressed,
@@ -41,7 +41,7 @@ class OutlineButton extends StatelessWidget {
       height: height ?? 50,
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(12),
         side: BorderSide(
           color: borderColor ?? Constants.primary
         )

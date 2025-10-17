@@ -1,3 +1,4 @@
+import 'package:ecommerce/pages/home/home_page.dart';
 import 'package:ecommerce/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import '../pages/splash/splash_page.dart';
@@ -9,6 +10,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RoutePath.splashRoute: return MaterialPageRoute(builder: (_) =>  const SplashPage());
     //auth routes
     case RoutePath.loginRoute: return MaterialPageRoute(builder: (_) =>  const LoginPage());
+
+    //main routes
+    case RoutePath.homeRoute: return MaterialPageRoute(builder: (_) =>  const HomePage());
 
     default:
       return MaterialPageRoute(builder: (_) {

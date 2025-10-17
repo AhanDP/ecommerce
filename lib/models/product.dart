@@ -11,7 +11,9 @@ class Product{
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     thumbnail = json['thumbnail'] ?? '';
-    averageRating = json['averageRating'] ?? 0.0;
+    averageRating = (json['averageRating'] is num)
+        ? (json['averageRating'] as num).toDouble()
+        : 0.0;
     title = json['title'] ?? '';
     variants = (json['variants'] != null) ? json['variants'].map<Variant>((e) => Variant.fromJson(e)).toList() : [];
   }

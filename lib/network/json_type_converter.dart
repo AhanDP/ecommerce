@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
 import '../models/responseHandler/generic_response.dart';
-import '../utills/helpers.dart';
 
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
@@ -23,31 +22,32 @@ class JsonSerializableConverter extends JsonConverter {
 
   dynamic _decode<T>(entity) {
     if (entity is Iterable) return _decodeList<T>(entity as List);
-    if (entity is Map) return _decodeMap<T>(entity as Map<String, dynamic>);
+    if (entity is Map) return _decodeMap<T>(Map<String, dynamic>.from(entity));
     return entity;
   }
 
   @override
   FutureOr<Response<ResultType>> convertResponse<ResultType, Item>(
-    Response response,
-  ) async {
+      Response response,
+      ) async {
     final jsonRes = await super.convertResponse(response);
-    return jsonRes.copyWith<ResultType>(body: _decode<Item>(jsonRes.body));
+    final body = _decode<Item>(jsonRes.body);
+    return jsonRes.copyWith<ResultType>(body: body);
   }
 
   @override
   FutureOr<Response> convertError<ResultType, Item>(Response response) async {
     final jsonRes = await super.convertError(response);
-    var type = jsonRes.body.runtimeType;
-    if (type == String) {
-      return jsonRes.copyWith(
-        body: Helpers.parseHtmlString(jsonRes.body.toString()),
+
+    try {
+      // Try decoding structured error
+      GenericResponse gResponse = GenericResponse.fromJson(
+        Map<String, dynamic>.from(jsonRes.body),
       );
-    } else {
-      GenericResponse gResponse = GenericResponse.fromJson(jsonRes.body);
-      return jsonRes.copyWith(
-        body: gResponse.message,
-      );
+      return jsonRes.copyWith(body: gResponse);
+    } catch (_) {
+      // Fallback to plain string message
+      return jsonRes.copyWith(body: jsonRes.body.toString());
     }
   }
 }

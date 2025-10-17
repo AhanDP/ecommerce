@@ -2,32 +2,24 @@ import 'package:ecommerce/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../network/api_service.dart';
-import '../../../network/interceptors/custom_interceptor.dart';
+import '../../network/api_call_handler.dart';
 
-abstract class TruckVtsState {}
+abstract class HomeState {}
 
-class TruckVtsInit extends TruckVtsState {}
+class HomeInit extends HomeState {}
+class HomeLoading extends HomeState {}
+class HomeMoreLoading extends HomeState {}
+class HomeFailed extends HomeState {final String error;HomeFailed(this.error);}
+class HomeLoaded extends HomeState {}
 
-class TruckVtsLoading extends TruckVtsState {}
-
-class TruckVtsMoreLoading extends TruckVtsState {}
-
-class TruckVtsFailed extends TruckVtsState {
-  final String error;
-
-  TruckVtsFailed(this.error);
-}
-
-class TruckVtsLoaded extends TruckVtsState {}
-
-class TruckVtsBloc extends Cubit<TruckVtsState> {
+class HomeBloc extends Cubit<HomeState> {
   List<Product> products = [];
   ScrollController? scrollController;
   int page = 1;
   bool isLoadNextPage = true;
   TextEditingController searchController = TextEditingController();
 
-  TruckVtsBloc() : super(TruckVtsInit());
+  HomeBloc() : super(HomeInit());
 
   void refreshData() {
     page = 1;
@@ -45,7 +37,7 @@ class TruckVtsBloc extends Cubit<TruckVtsState> {
           scrollController?.offset) {
         if (isLoadNextPage) {
           page++;
-          fetchMoreTruckVts();
+          fetchMoreProducts();
         }
       }
     });
@@ -59,46 +51,40 @@ class TruckVtsBloc extends Cubit<TruckVtsState> {
     }
   }
 
-  Future<void> fetchTruckVts(String? val) async {
-    if(val == null || val == '') {
-      searchController.clear();
-      emit(TruckVtsLoading());
-    }
-    refreshData();
-    try {
-      final response = await ApiProvider.instance.getProduct(page, searchController.text);
-      bool status = response.statusCode == 200 || response.statusCode == 201;
-      if (status) {
-        products = response.body?.products?.truckVts ?? [];
+  Future<void> fetchProducts(String? val) async {
+    await ApiCallHandler.call(
+      apiCall: () async => await ApiProvider.instance.getProduct(page, searchController.text, 10),
+      onLoading: () {
+        if(val == null || val == '') {
+          searchController.clear();
+          emit(HomeLoading());
+        }
+        refreshData();
+      },
+      onSuccess: (response) async {
+        products = response?.products ?? [];
         setIsNextPage(products);
-        emit(TruckVtsLoaded());
-      } else {
-        emit(TruckVtsFailed(response.error.toString()));
-      }
-    } on NetworkException {
-      emit(TruckVtsFailed("No internet connection"));
-    } catch (e) {
-      emit(TruckVtsFailed(e.toString()));
-    }
+        emit(HomeLoaded());
+      },
+      onFailure: (errorMsg, isNetworkError) {
+        emit(HomeFailed(errorMsg));
+      },
+    );
   }
 
-  Future<void> fetchMoreTruckVts() async {
-    emit(TruckVtsMoreLoading());
-    try {
-      final response = await ApiProvider.instance.fetchTruckVts(page, searchController.text);
-      bool status = response.statusCode == 200 || response.statusCode == 201;
-      if (status) {
-        var truckVts = response.body?.products?.truckVts ?? [];
-        products.addAll(truckVts);
-        setIsNextPage(truckVts);
-        emit(TruckVtsLoaded());
-      } else {
-        emit(TruckVtsFailed(response.error.toString()));
-      }
-    } on NetworkException {
-      emit(TruckVtsFailed("No internet connection"));
-    } catch (e) {
-      emit(TruckVtsFailed(e.toString()));
-    }
+  Future<void> fetchMoreProducts() async {
+    await ApiCallHandler.call(
+      apiCall: () async => await ApiProvider.instance.getProduct(page, searchController.text, 10),
+      onLoading: () => emit(HomeMoreLoading()),
+      onSuccess: (response) async {
+        var productList = response?.products ?? [];
+        products.addAll(productList);
+        setIsNextPage(productList);
+        emit(HomeLoaded());
+      },
+      onFailure: (errorMsg, isNetworkError) {
+        emit(HomeFailed(errorMsg));
+      },
+    );
   }
 }
