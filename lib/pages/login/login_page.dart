@@ -5,7 +5,7 @@ import '../../components/custom_app_bar.dart';
 import '../../components/label.dart';
 import '../../components/passwordfield.dart';
 import '../../components/textfield.dart';
-import '../../utills/constants.dart';
+import '../../utils/constants.dart';
 import 'login_cubit.dart';
 
 class LoginPage extends StatelessWidget {

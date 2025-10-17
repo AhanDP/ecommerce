@@ -8,7 +8,7 @@ import 'navigation/route_path.dart';
 import 'navigation/routes.dart';
 import 'package:logging/logging.dart';
 import 'network/http_overrides.dart';
-import 'utills/constants.dart';
+import 'utils/constants.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();

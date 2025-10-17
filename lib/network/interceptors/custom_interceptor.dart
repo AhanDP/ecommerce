@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../localStorage/local_storage.dart';
-import '../../utills/constants.dart';
+import '../../utils/constants.dart';
 
 class CustomInterceptor implements Interceptor {
 

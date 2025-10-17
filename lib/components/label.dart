@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utills/constants.dart';
+import '../utils/constants.dart';
 
 class Label extends StatelessWidget {
   final String text;

@@ -2,7 +2,7 @@ import 'package:ecommerce/components/loader.dart';
 import 'package:flutter/material.dart';
 import '../../navigation/navigation.dart';
 import '../../navigation/route_path.dart';
-import '../../utills/constants.dart';
+import '../../utils/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

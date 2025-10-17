@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'button.dart';
 import '../navigation/navigation.dart';
-import '../utills/constants.dart';
+import '../utils/constants.dart';
 
 class CustomDialog {
   CustomDialog._();

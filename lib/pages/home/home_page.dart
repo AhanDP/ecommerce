@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../components/error_text.dart';
 import '../../components/loader.dart';
-import '../../utills/constants.dart';
-import 'home_card.dart';
+import '../../utils/constants.dart';
+import 'widgets/home_card.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,4 +1,6 @@
+import 'package:ecommerce/models/product.dart';
 import 'package:ecommerce/pages/home/home_page.dart';
+import 'package:ecommerce/pages/home/productDetail/product_detail_page.dart';
 import 'package:ecommerce/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import '../pages/splash/splash_page.dart';
@@ -13,6 +15,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     //main routes
     case RoutePath.homeRoute: return MaterialPageRoute(builder: (_) =>  const HomePage());
+    case RoutePath.productRoute: return MaterialPageRoute(builder: (_) =>  ProductDetailPage(product: settings.arguments as Product));
 
     default:
       return MaterialPageRoute(builder: (_) {

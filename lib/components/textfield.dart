@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../utills/constants.dart';
+import '../utils/constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final bool? autofocus;

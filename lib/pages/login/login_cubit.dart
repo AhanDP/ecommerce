@@ -6,7 +6,7 @@ import '../../navigation/navigation.dart';
 import '../../navigation/route_path.dart';
 import '../../network/api_call_handler.dart';
 import '../../network/api_service.dart';
-import '../../utills/helpers.dart';
+import '../../utils/helpers.dart';
 
 abstract class LoginState {}
 

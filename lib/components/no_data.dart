@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utills/constants.dart';
+import '../utils/constants.dart';
 import 'button.dart';
 
 class NoDataWidget extends StatelessWidget {
@@ -29,7 +29,7 @@ class NoDataWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(50),
             ),
             padding: const EdgeInsets.all(16),
-            child: Image.asset("assets/images/no_data.png", height: 60, width: 60,)
+            child: Image.asset("assets/images/no_data.jpg", height: 60, width: 60,)
           ),
           const SizedBox(height: 20,),
           Text(title, style: TextStyle(color: Constants.primaryTextColor, fontWeight: FontWeight.w600, fontSize: 18)),
