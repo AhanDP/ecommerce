@@ -14,7 +14,7 @@ class Product {
   double averageRating = 0.0;
   int reviewsCount = 0;
   int ordersCount = 0;
-  Brand? brand;
+  BrandData? brand;
   List<CategoryItem> productCategories = [];
   List<TagItem> tags = [];
   List<Variant> variants = [];
@@ -41,7 +41,7 @@ class Product {
     reviewsCount = json['reviewsCount'] ?? 0;
     ordersCount = json['ordersCount'] ?? 0;
 
-    brand = (json['brand'] != null) ? Brand.fromJson(json['brand']) : null;
+    brand = (json['brand'] != null) ? BrandData.fromJson(json['brand']) : null;
 
     productCategories = (json['productCategories'] != null)
         ? (json['productCategories'] as List)
@@ -67,12 +67,12 @@ class Product {
   }
 }
 
-class Brand {
+class BrandData {
   String id = '';
   String handle = '';
   String title = '';
 
-  Brand.fromJson(Map<String, dynamic> json) {
+  BrandData.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     handle = json['handle'] ?? '';
     title = json['title'] ?? '';

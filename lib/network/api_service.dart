@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:chopper/chopper.dart';
+import 'package:ecommerce/models/responseHandler/brand_response.dart';
 import 'package:ecommerce/models/responseHandler/product_response.dart';
+import 'package:ecommerce/models/responseHandler/review_response.dart';
 import '../models/responseHandler/generic_response.dart';
 import '../models/responseHandler/login_response.dart';
+import '../models/responseHandler/similar_product_response.dart';
 import 'interceptors/custom_interceptor.dart';
 import 'json_type_converter.dart';
 import 'json_type_map.dart';
@@ -30,6 +33,15 @@ abstract class ApiService extends ChopperService {
 
   @GET(path: "/store/product-search")
   Future<Response<ProductResponse>> getProduct(@Query() int page, @Query() String q, @Query() int limit);
+
+  @GET(path: "/store/product-review/product/{id}")
+  Future<Response<ReviewResponse>> getProductReview(@Path('id') String id, @Query() int limit);
+
+  @GET(path: "/store/product/{id}/similar")
+  Future<Response<SimilarProductResponse>> getSimilarProduct(@Path('id') String id, @Query() int limit);
+
+  @GET(path: "store/product/{brand}/brand")
+  Future<Response<BrandResponse>> getBrand(@Path('brand') String brand);
 
 }
 

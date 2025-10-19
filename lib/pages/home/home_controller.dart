@@ -87,4 +87,16 @@ class HomeBloc extends Cubit<HomeState> {
       },
     );
   }
+
+  double computeAspectRatio(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    const horizontalPadding = 10.0 * 2;
+    const crossAxisCount = 2;
+    const crossAxisSpacing = 12.0;
+
+    final availableWidth = size.width - horizontalPadding;
+    final itemWidth = (availableWidth - (crossAxisSpacing * (crossAxisCount - 1))) / crossAxisCount;
+    final itemHeight = itemWidth * 1.55;
+    return itemWidth / itemHeight;
+  }
 }
